@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E6B4A">
+<meta name="description" content="Registre du dispensaire et de la maternité : saisie en tableaux, calculs automatiques, rapport mensuel à imprimer.">
+<title>Registre Santé</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip noprint" href="#main">Aller au contenu</a>
+
+<header class="topbar noprint">
+  <div class="topbar-in">
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 48 48" role="img" aria-label="Logo Registre Santé"><rect width="48" height="48" rx="12" fill="#0E6B4A"/><g fill="#FFFFFF" fill-opacity="0.35"><rect x="6" y="6" width="10" height="10" rx="2"/><rect x="32" y="6" width="10" height="10" rx="2"/><rect x="6" y="32" width="10" height="10" rx="2"/><rect x="32" y="32" width="10" height="10" rx="2"/></g><g fill="#FFFFFF"><rect x="19" y="6" width="10" height="10" rx="2"/><rect x="6" y="19" width="10" height="10" rx="2"/><rect x="32" y="19" width="10" height="10" rx="2"/><rect x="19" y="32" width="10" height="10" rx="2"/></g><rect x="19" y="19" width="10" height="10" rx="2" fill="#E8830C"/></svg>
+      <span>Registre Santé</span>
+    </div>
+    <nav id="nav" class="nav" aria-label="Pages du registre"></nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="card context noprint" aria-label="Site, mois et infirmier">
+    <div class="chips" id="sites" role="group" aria-label="Sites"></div>
+    <div class="fields">
+      <label class="field">Nom du site<input id="siteName" autocomplete="off"></label>
+      <label class="field">Mois<input id="month" type="month"></label>
+      <label class="field">Infirmier(ère)<input id="nurse" autocomplete="name" placeholder="Nom de l'infirmier"></label>
+    </div>
+  </section>
+
+  <div id="p-dash" class="page"></div>
+  <div id="p-saisie" class="page"></div>
+  <div id="p-rapport" class="page"></div>
+  <div id="p-sites" class="page"></div>
+
+  <noscript><p class="card">Ce site a besoin de JavaScript pour fonctionner. Activez-le dans votre navigateur.</p></noscript>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/calc.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
