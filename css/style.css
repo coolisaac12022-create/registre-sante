@@ -1,0 +1,212 @@
+/* Registre Santé : feuille de style.
+   Les couleurs, polices et formes suivent la charte (docs/CHARTE.md). */
+
+:root {
+  --vert: #0E6B4A;
+  --vert-profond: #0A4D36;
+  --vert-tendre: #E4F1EA;
+  --vert-total: #CFE6DA;
+  --encre: #12201A;
+  --attenue: #4F6258;
+  --papier: #F6F7F4;
+  --blanc: #FFFFFF;
+  --ligne: #CAD5CE;
+  --entete: #E9EFEB;
+  --soleil: #E8830C;
+  --soleil-pale: #FCEBD2;
+  --soleil-texte: #7A4300;
+  --alerte: #B3261E;
+  --alerte-pale: #FBE4E1;
+
+  --police-titre: "Bricolage Grotesque", system-ui, sans-serif;
+  --police-texte: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --police-chiffres: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --r-bouton: 8px;
+  --r-carte: 12px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font: 400 16px/1.5 var(--police-texte);
+}
+h1, h2, h3 { font-family: var(--police-titre); margin: 0; text-wrap: balance; }
+h1 { font-weight: 700; font-size: 28px; line-height: 34px; color: var(--vert-profond); }
+h2 { font-weight: 600; font-size: 20px; line-height: 26px; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+.skip { position: absolute; left: -999px; top: 8px; background: var(--vert-profond); color: #fff; padding: 10px 14px; border-radius: var(--r-bouton); z-index: 50; }
+.skip:focus { left: 8px; }
+
+/* ---------- En-tête et navigation ---------- */
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--blanc); border-bottom: 1px solid var(--ligne); padding-top: env(safe-area-inset-top, 0px); }
+.topbar-in { max-width: 1100px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 20px/1 var(--police-titre); color: var(--vert-profond); }
+
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: calc(64px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--blanc); border-top: 1px solid var(--ligne);
+}
+.nav-btn {
+  border: 0; background: transparent; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font: 500 12px/16px var(--police-texte); color: var(--attenue);
+}
+.nav-btn .pill { width: 48px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.nav-btn.on { color: var(--vert-profond); font-weight: 600; }
+.nav-btn.on .pill { background: var(--vert-tendre); }
+
+/* ---------- Mise en page ---------- */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 16px 16px calc(88px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 16px; }
+.page { display: none; flex-direction: column; gap: 16px; }
+.page.show { display: flex; }
+.card { background: var(--blanc); border: 1px solid var(--ligne); border-radius: var(--r-carte); padding: 12px 14px; }
+.stack { display: flex; flex-direction: column; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.muted { color: var(--attenue); }
+.small { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--attenue); }
+.eyebrow { font: 500 12px/16px var(--police-chiffres); letter-spacing: .08em; text-transform: uppercase; color: var(--attenue); }
+
+/* ---------- Boutons ---------- */
+.btn, .chip {
+  min-height: 48px; padding: 0 20px; border-radius: var(--r-bouton); cursor: pointer;
+  font: 600 16px/1 var(--police-texte); white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--blanc); color: var(--encre); border: 1.5px solid var(--ligne);
+}
+.btn-pri { background: var(--vert); color: #fff; border-color: var(--vert); }
+.btn-pri:hover { background: var(--vert-profond); border-color: var(--vert-profond); }
+.btn-sec, .chip.plus { background: var(--blanc); color: var(--vert-profond); border: 2px solid var(--vert-profond); }
+.btn-danger { background: var(--blanc); color: var(--alerte); border: 2px solid var(--alerte); }
+.btn-danger.armed { background: var(--alerte); color: #fff; }
+.chip.on { background: var(--vert); color: #fff; border-color: var(--vert); }
+.icon-btn { min-width: 44px; min-height: 44px; border: 0; background: transparent; color: var(--attenue); cursor: pointer; font-size: 15px; }
+th .icon-btn { color: var(--vert-profond); font-size: 20px; font-weight: 700; }
+:where(button, input, select, textarea, a):focus-visible { outline: 3px solid var(--soleil); outline-offset: 2px; }
+
+.chips, .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.chips > *, .tabs > * { flex: none; }
+
+/* ---------- Champs ---------- */
+.context { display: flex; flex-direction: column; gap: 12px; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: 13px; }
+.field input, .field select, .field textarea {
+  min-height: 48px; padding: 0 14px; background: var(--blanc);
+  border: 1.5px solid var(--attenue); border-radius: var(--r-bouton); font-size: 16px; font-weight: 400;
+}
+.field textarea { padding: 10px 14px; min-height: 84px; resize: vertical; line-height: 22px; }
+
+/* ---------- Accueil ---------- */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.kpi { background: var(--blanc); border: 1px solid var(--ligne); border-radius: var(--r-carte); padding: 10px 12px; }
+.kpi span { display: block; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--attenue); }
+.kpi b { display: block; font: 600 24px/32px var(--police-chiffres); font-variant-numeric: tabular-nums; }
+.bar { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 13px; }
+.bar .lb { width: 84px; flex: none; color: var(--attenue); }
+.bar .track { flex: 1; height: 16px; background: var(--vert-tendre); }
+.bar .fill { display: block; height: 100%; background: var(--vert); }
+.bar .vl { width: 44px; flex: none; text-align: right; font: 500 13px var(--police-chiffres); }
+
+.al { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 10px 14px; border-radius: var(--r-carte); background: var(--soleil-pale); color: var(--soleil-texte); font-weight: 500; line-height: 22px; }
+.al svg { flex: none; }
+.al.ok { background: var(--vert-tendre); color: var(--vert-profond); }
+.al.err { background: var(--alerte-pale); color: var(--alerte); }
+.al .grow { flex: 1 1 200px; min-width: 0; }
+.guide { margin: 6px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- Tableaux type Excel ---------- */
+.sheet { overflow-x: auto; background: var(--blanc); border: 1px solid var(--ligne); }
+.sheet table { border-collapse: collapse; width: 100%; }
+.sheet th, .sheet td { border: 1px solid var(--ligne); padding: 0; font-size: 15px; }
+th.ltr { background: var(--entete); color: var(--attenue); font: 400 11px/16px var(--police-chiffres); text-align: center; padding: 2px; }
+th.hd { background: var(--entete); font-weight: 600; font-size: 14px; line-height: 18px; text-align: left; padding: 8px 10px; }
+td.rn { background: var(--entete); color: var(--attenue); font: 12px var(--police-chiffres); text-align: center; width: 36px; }
+td.cell input {
+  display: block; width: 100%; min-width: 76px; height: 48px; padding: 0 10px; border: 0; border-radius: 0;
+  background: transparent; text-align: right; font: 500 16px var(--police-chiffres);
+}
+td.cell.txt input { min-width: 130px; text-align: left; font: 400 16px var(--police-texte); }
+td.cell input:focus { outline: 3px solid var(--vert); outline-offset: -3px; background: var(--blanc); }
+td.calc { height: 48px; padding: 0 10px; background: var(--vert-tendre); color: var(--vert-profond); text-align: right; font: 600 16px var(--police-chiffres); white-space: nowrap; }
+td.calc.neg { color: var(--alerte); }
+tr.tot td { height: 48px; padding: 0 10px; background: var(--vert-total); color: var(--vert-profond); text-align: right; font: 600 16px var(--police-chiffres); white-space: nowrap; }
+tr.tot td:first-child, tr.tot td.c-lbl { text-align: left; font-family: var(--police-texte); }
+td.ctl { width: 48px; text-align: center; }
+
+.sec { display: none; flex-direction: column; gap: 8px; }
+.sec.show { display: flex; }
+.st th, .st td { padding: 8px 10px; }
+.st th { background: var(--entete); text-align: left; font-weight: 600; }
+.st td.num { text-align: right; font-family: var(--police-chiffres); font-weight: 500; }
+
+/* ---------- Panneau des colonnes ---------- */
+.crow { display: flex; gap: 8px; align-items: center; }
+.crow input { flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border: 1.5px solid var(--attenue); border-radius: var(--r-bouton); background: var(--blanc); }
+.crow .icon-btn { flex: none; border: 1.5px solid var(--ligne); border-radius: var(--r-bouton); background: var(--blanc); color: var(--encre); font-size: 18px; }
+.crow .icon-btn:disabled, .btn:disabled { opacity: .4; cursor: not-allowed; }
+.crow input:disabled { background: var(--entete); color: var(--attenue); }
+.chk { display: flex; flex-wrap: wrap; gap: 8px; }
+.chk label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1.5px solid var(--ligne); border-radius: var(--r-bouton); font-size: 14px; }
+.chk input { width: 20px; height: 20px; }
+
+/* ---------- Rapport ---------- */
+.rephead { background: var(--blanc); border: 2px solid var(--encre); padding: 12px; text-align: center; display: flex; flex-direction: column; gap: 2px; }
+.rephead b { font: 700 18px/24px var(--police-titre); }
+.sig { display: flex; gap: 32px; margin-top: 40px; }
+.sig div { flex: 1; border-top: 1px solid var(--encre); padding-top: 6px; text-align: center; font-size: 13px; }
+
+.printhead { display: none; margin-bottom: 8px; }
+
+/* ---------- Grands écrans ---------- */
+@media (min-width: 760px) {
+  .nav { position: static; display: flex; gap: 4px; height: auto; padding: 0; border: 0; background: transparent; }
+  .nav-btn { flex-direction: row; gap: 8px; height: 44px; padding: 0 14px; border-radius: var(--r-bouton); font-size: 15px; }
+  .nav-btn .pill { width: auto; height: auto; background: transparent !important; }
+  .nav-btn.on { background: var(--vert-tendre); }
+  .wrap { padding-bottom: 48px; }
+}
+
+/* ---------- Téléphone : la première colonne reste visible ---------- */
+@media (max-width: 759px) {
+  .rn { display: none; }
+  td.cell.txt input { min-width: 104px; }
+  .c-lbl { position: sticky; left: 0; z-index: 1; box-shadow: 1px 0 0 var(--ligne); }
+  td.cell.c-lbl { background: var(--blanc); }
+  th.c-lbl { background: var(--entete); }
+  tr.tot td.c-lbl { background: var(--vert-total); }
+  .sig { gap: 16px; }
+}
+
+/* ---------- Impression ---------- */
+@page { size: A4 landscape; margin: 10mm; }
+@media print {
+  :root { --ligne: #333; --entete: #EEEEEE; --vert-tendre: #F2F2F2; --vert-total: #DDDDDD; --vert-profond: #000; --alerte: #000; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .noprint { display: none !important; }
+  .wrap { padding: 0; max-width: none; }
+  .printhead { display: block; font-size: 12pt; }
+  .page { display: none !important; }
+  .page.show { display: block !important; }
+  .sec { display: none; page-break-after: always; }
+  .sec.show { display: block; }
+  body.printall .sec { display: block; }
+  .sec:last-of-type { page-break-after: auto; }
+  .sheet { border: 0; overflow: visible; }
+  td.cell input { height: auto; padding: 4px 6px; min-width: 0; }
+  td.calc, tr.tot td { height: auto; padding: 4px 6px; }
+  .al, .card { border: 1px solid #333; background: #fff; color: #000; }
+  .sig { margin-top: 60px; }
+  .field textarea { border: 1px solid #000; }
+  h1 { color: #000; }
+}
